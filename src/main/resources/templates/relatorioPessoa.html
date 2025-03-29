@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Pessoas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <h1>Lista de Pessoas</h1>
+    <div class="container">
+    <table class="table">
+        <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+        <tbody>
+            <tr th:each="pessoa : ${pessoas}">
+            <td th:text="${pessoa.nome}"></td>
+            <td th:text="${pessoa.telefone}"></td>
+            <td th:text="${pessoa.email}"></td>
+
+    </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div class="paginacao">
+        <span th:if="${paginaAtual > 0}">
+            <a th:href="@{/v1/pessoa(pagina=${paginaAtual - 1})}">Página Anterior</a>
+        </span>
+    <span> Página <span th:text="${paginaAtual + 1}"></span> de <span th:text="${totalPaginas}"></span> </span>
+    <span th:if="${paginaAtual < totalPaginas - 1}">
+            <a th:href="@{/v1/pessoa(pagina=${paginaAtual + 1})}">Próxima Página</a>
+        </span>
+</div>
+
+</body>
+</html>
